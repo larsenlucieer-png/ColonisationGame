@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First Fleet Quiz Race</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="screen menu-screen active" id="menuScreen" aria-label="Main menu">
+        <div class="menu-copy">
+          <p class="eyebrow">Sydney Cove, 1788</p>
+          <h1>Quiz Race</h1>
+          <div class="menu-actions">
+            <button class="primary-button" id="startButton" type="button">Start Quiz</button>
+            <button class="primary-button" id="flappyButton" type="button">Flappy Fleet</button>
+            <button class="ghost-button" id="helpButton" type="button">Help</button>
+            <button class="ghost-button" id="leaderboardButton" type="button">Leaderboard</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen difficulty-screen" id="difficultyScreen" aria-label="Choose difficulty">
+        <div class="top-bar">
+          <div>
+            <p class="eyebrow">Choose your race speed</p>
+            <h1>Difficulty</h1>
+          </div>
+          <button class="ghost-button" data-screen="menu" type="button">Back</button>
+        </div>
+        <div class="difficulty-grid">
+          <button class="difficulty-card" data-difficulty="easy" type="button">
+            <strong>Easy</strong>
+            <span>Opponents answer slower.</span>
+          </button>
+          <button class="difficulty-card" data-difficulty="medium" type="button">
+            <strong>Medium</strong>
+            <span>Opponents keep a steady pace.</span>
+          </button>
+          <button class="difficulty-card" data-difficulty="hard" type="button">
+            <strong>Hard</strong>
+            <span>Opponents answer quicker.</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen help-screen" id="helpScreen" aria-label="Help">
+        <div class="top-bar">
+          <div>
+            <p class="eyebrow">How to play</p>
+            <h1>Help</h1>
+          </div>
+          <button class="ghost-button" data-screen="menu" type="button">Back</button>
+        </div>
+        <div class="help-content">
+          <p>Answer each Kahoot-style question before the timer runs out.</p>
+          <p>A correct answer moves your ship forward. One wrong answer moves your ship backwards.</p>
+          <p>Get three correct answers in a row to ready a bonus. Your next correct answer moves two spaces, then the bonus goes back to normal.</p>
+          <p>The first racer to move forward 10 spaces wins. Questions are randomly picked from the 15-question bank.</p>
+          <p>The opponent ships can answer right or wrong too. Hard difficulty makes them faster and more accurate.</p>
+          <p>In Flappy Fleet, tap, click, or press Space to keep your ship flying through the harbour. The level speeds up as your score grows.</p>
+          <p>Every checkpoint pauses Flappy Fleet for three random quiz questions. After each quiz section, the harbour gets harder and the pipes move closer together.</p>
+        </div>
+      </section>
+
+      <section class="screen leaderboard-screen" id="leaderboardScreen" aria-label="Leaderboard">
+        <div class="top-bar">
+          <div>
+            <p class="eyebrow">Best race records</p>
+            <h1>Leaderboard</h1>
+          </div>
+          <button class="ghost-button" data-screen="menu" type="button">Back</button>
+        </div>
+        <div class="leaderboard-grid" id="leaderboardGrid"></div>
+      </section>
+
+      <section class="screen game-screen" id="gameScreen" aria-label="Quiz race game">
+        <section class="race-panel" aria-label="First Fleet racing boats">
+        <div class="top-bar">
+          <div>
+            <p class="eyebrow" id="difficultyLabel">Medium Race</p>
+            <h1>Quiz Race</h1>
+          </div>
+          <div class="race-actions">
+            <button class="ghost-button" data-screen="menu" type="button">Home</button>
+            <button class="ghost-button" data-screen="difficulty" type="button">Difficulty</button>
+            <button class="ghost-button" id="resetButton" type="button" aria-label="Restart race">Restart</button>
+          </div>
+        </div>
+
+        <div class="race-track" id="raceTrack"></div>
+      </section>
+
+      <section class="quiz-panel" aria-live="polite">
+        <div class="score-strip">
+          <div>
+            <span class="label">Question</span>
+            <strong id="questionNumber">1 / 15</strong>
+          </div>
+          <div>
+            <span class="label">Correct Steps</span>
+            <strong id="correctCount">0 / 10</strong>
+          </div>
+          <div>
+            <span class="label">Streak</span>
+            <strong id="streakCount">0</strong>
+          </div>
+          <div>
+            <span class="label">Your Position</span>
+            <strong id="playerPosition">Start</strong>
+          </div>
+          <div>
+            <span class="label">Opponent Pace</span>
+            <strong id="opponentPace">Medium</strong>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div class="question-header">
+            <span id="timer">20</span>
+            <p id="feedback">Pick an answer to move your ship.</p>
+          </div>
+          <h2 id="questionText"></h2>
+          <div class="answer-grid" id="answerGrid"></div>
+        </div>
+      </section>
+      </section>
+
+      <section class="screen flappy-screen" id="flappyScreen" aria-label="Flappy Fleet game">
+        <div class="flappy-header">
+          <div>
+            <p class="eyebrow">Harbour challenge</p>
+            <h1>Flappy Fleet</h1>
+          </div>
+          <div class="flappy-stats">
+            <div>
+              <span class="label">Score</span>
+              <strong id="flappyScore">0</strong>
+            </div>
+            <div>
+              <span class="label">High Score</span>
+              <strong id="flappyHighScore">0</strong>
+            </div>
+          </div>
+          <div class="race-actions">
+            <button class="ghost-button" data-screen="menu" type="button">Home</button>
+            <button class="ghost-button" id="flappyRestartButton" type="button">Restart</button>
+          </div>
+        </div>
+
+        <div class="flappy-toolbar" aria-label="Ship colour">
+          <span class="label">Ship Colour</span>
+          <button class="colour-swatch active" data-flappy-colour="none" style="--swatch:#f2d2b5" type="button" aria-label="Natural ship colour"></button>
+          <button class="colour-swatch" data-flappy-colour="red" style="--swatch:#d1495b" type="button" aria-label="Red ship colour"></button>
+          <button class="colour-swatch" data-flappy-colour="blue" style="--swatch:#277da1" type="button" aria-label="Blue ship colour"></button>
+          <button class="colour-swatch" data-flappy-colour="green" style="--swatch:#2a9d8f" type="button" aria-label="Green ship colour"></button>
+          <button class="colour-swatch" data-flappy-colour="gold" style="--swatch:#f2b705" type="button" aria-label="Gold ship colour"></button>
+        </div>
+
+        <div class="flappy-stage">
+          <canvas id="flappyCanvas" width="960" height="520" aria-label="Flappy Fleet play area"></canvas>
+          <div class="flappy-overlay" id="flappyOverlay">
+            <strong>Click to Sail</strong>
+            <span>Tap, click, or press Space to fly.</span>
+          </div>
+          <div class="flappy-quiz hidden" id="flappyQuiz" aria-live="polite">
+            <p class="eyebrow" id="flappyQuizKicker">Checkpoint Quiz</p>
+            <h2 id="flappyQuizQuestion"></h2>
+            <div class="flappy-quiz-answers" id="flappyQuizAnswers"></div>
+            <p id="flappyQuizProgress"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
