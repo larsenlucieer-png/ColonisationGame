@@ -1,9 +1,9 @@
 const ships = [
-  { name: "Arthur Phillip", role: "player", image: "./assets/ship-player.png" },
-  { name: "John Hunter", role: "opponent", image: "./assets/ship-red.png" },
-  { name: "Watkin Tench", role: "opponent", image: "./assets/ship-blue.png" },
-  { name: "David Collins", role: "opponent", image: "./assets/ship-green.png" },
-  { name: "John White", role: "opponent", image: "./assets/ship-gold.png" }
+  { name: "Arthur Phillip", role: "player", image: "./ship-player.png" },
+  { name: "John Hunter", role: "opponent", image: "./ship-red.png" },
+  { name: "Watkin Tench", role: "opponent", image: "./ship-blue.png" },
+  { name: "David Collins", role: "opponent", image: "./ship-green.png" },
+  { name: "John White", role: "opponent", image: "./ship-gold.png" }
 ];
 
 const difficulties = {
@@ -149,7 +149,7 @@ const flappyQuizAnswers = document.querySelector("#flappyQuizAnswers");
 const flappyQuizProgress = document.querySelector("#flappyQuizProgress");
 const flappyContext = flappyCanvas.getContext("2d");
 const flappyShip = new Image();
-flappyShip.src = "./assets/ship-player.png";
+flappyShip.src = "./ship-player.png";
 
 const flappyColours = {
   none: "none",
